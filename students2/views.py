@@ -12,13 +12,13 @@ def my_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            redirect('home')
+            return redirect('home')
         else:
             return HttpResponse("unauthorized")
     return render(request, 'login.html')
 
 def home(request):
-    return HttpResponse("hi login at <a href='/login'>here</a>")
+    return HttpResponse(f"hi {request.user} login at <a href='/login'>here</a>")
 
 @login_required
 def add_course(request):
