@@ -1,0 +1,13 @@
+.login {
+    position: absolute;
+    left:25%;
+    top:35%;
+    background-color: silver;
+    padding: 3%;
+    box-shadow: 1px 1px black;
+}
+
+.login::before {
+    content: "Admin Login";
+    font-weight: bold;
+}
