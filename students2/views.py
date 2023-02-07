@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from .models import Course, User
-from django.contrib import messages
 # Create your views here.
 
 def home(request,methods=["POST ,GET"]):
@@ -13,8 +12,21 @@ def add_course(request):
         course=Course(name=name, description=description)
         course.save()
         request.session["user"]="anonymous"
-    return render(request, "add_course.html", {"user":request.session.get("user", "not logged in")})
+        if "user" in request.session:
+            return render(request, "add_course.html", {"user":f'You are logged in as {request.session.get("user")}'})
+        else:
+            return render(request, "add_course.html", {"user":"You are not logged in"})
+    else:
+        return render(request, "add_course.html", {"user":"You are not logged in"})
 
+def add_student(request):
+    if request.method=='POST':
+        name=request.POST["student_name"]
+        email=request.POST["student_email"]
+        grade=request.POST["student_grade"]
+        student=Student(name=name, email=email, grade=grade)
+        student.save()
+    return render(request)
 
 def show_users(request):
     users=User.objects.all()
