@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Course, User
+from .models import Course, User, Student
+from django.contrib import messages
 # Create your views here.
 
 def home(request,methods=["POST ,GET"]):
@@ -26,7 +27,8 @@ def add_student(request):
         grade=request.POST["student_grade"]
         student=Student(name=name, email=email, grade=grade)
         student.save()
-    return render(request)
+        msg = messages.success(request,f"{student.name} Has Been Added")
+    return render(request,"add_student.html", {"message":msg} )
 
 def show_users(request):
     users=User.objects.all()
