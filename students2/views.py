@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from .models import Course, User, Student
-<<<<<<< HEAD
 from django.contrib import messages
-=======
->>>>>>> bc5b6ce192b72a2ecd1534cf049e4f39988464b9
 # Create your views here.
 
 def home(request,methods=["POST ,GET"]):
@@ -31,7 +28,9 @@ def add_student(request):
         student=Student(name=name, email=email, grade=grade)
         student.save()
         msg = messages.success(request,f"{student.name} Added to DB")
-    return render(request,"add_student.html", {"message":msg})
+        return render(request,"add_student.html", {"message":msg})
+    else:
+        return render(request,"add_student.html")
 
 def show_users(request):
     users=User.objects.all()
