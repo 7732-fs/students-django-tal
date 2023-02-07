@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Course, User
+from django.contrib import messages
 # Create your views here.
 
 def add_course(request):
@@ -15,3 +16,5 @@ def add_course(request):
 def show_users(request):
     users=User.objects.all()
     return render(request, "users.html", {"users":users})
+
+
