@@ -31,8 +31,8 @@ def add_student(request):
         student=Student(name=name, email=email, grade=grade)
         student.save()
 <<<<<<< HEAD
-        msg = messages.success(request,f"{student.name} Has Been Added")
-    return render(request,"add_student.html", {"message":msg} )
+       
+    return render(request)
 =======
     return render(request, "add_student.html")
 >>>>>>> bc5b6ce192b72a2ecd1534cf049e4f39988464b9
