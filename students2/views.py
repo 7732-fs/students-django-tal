@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Course, User
+from .models import Course, User, Student
 # Create your views here.
 
 def home(request,methods=["POST ,GET"]):
@@ -26,7 +26,7 @@ def add_student(request):
         grade=request.POST["student_grade"]
         student=Student(name=name, email=email, grade=grade)
         student.save()
-    return render(request)
+    return render(request, "add_student.html")
 
 def show_users(request):
     users=User.objects.all()
