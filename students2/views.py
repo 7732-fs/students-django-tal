@@ -8,9 +8,8 @@ def add_course(request):
         description=request.POST["description"]
         course=Course(name=name, description=description)
         course.save()
-        courses = Course.objects.all()
         request.session["user"]="anonymous"
-    return render(request, "add_course.html", {"courses":courses}, {"user":request.session.get("user", "not logged in")})
+    return render(request, "add_course.html", {"user":request.session.get("user", "not logged in")})
 
 
 def show_users(request):
