@@ -26,7 +26,8 @@ def add_student(request):
         grade=request.POST["student_grade"]
         student=Student(name=name, email=email, grade=grade)
         student.save()
-    return render(request, "add_student.html")
+       
+    return render(request)
 
 def show_users(request):
     users=User.objects.all()
