@@ -9,7 +9,12 @@ def add_course(request):
         course=Course(name=name, description=description)
         course.save()
         request.session["user"]="anonymous"
-    return render(request, "add_course.html", {"user":request.session.get("user", "not logged in")})
+        if "user" in request.session:
+            return render(request, "add_course.html", {"user":f'You are logged in as {request.session.get("user")}'})
+        else:
+            return render(request, "add_course.html", {"user":"You are not logged in"})
+    else:
+        return render(request, "add_course.html", {"user":"You are not logged in"})
 
 
 def show_users(request):
