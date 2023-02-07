@@ -2,6 +2,9 @@ from django.shortcuts import render
 from .models import Course, User
 # Create your views here.
 
+def home(request,methods=["POST ,GET"]):
+    return render(request,"home.html")
+
 def add_course(request):
     if request.method=='POST':
         name=request.POST["course_name"]
@@ -15,3 +18,4 @@ def add_course(request):
 def show_users(request):
     users=User.objects.all()
     return render(request, "users.html", {"users":users})
+
