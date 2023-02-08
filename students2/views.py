@@ -36,7 +36,6 @@ def show_users(request):
 def register(request):
     student_name, student_email, student_course=request.GET.values()
     student=Student.objects.create(name=student_name, email=student_email)
-    print(student_course)
     course=Course.objects.get(name=student_course)
     course.students.add(student)
     return HttpResponse(student.id)
