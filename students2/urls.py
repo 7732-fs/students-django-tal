@@ -7,5 +7,6 @@ urlpatterns=[
     path('login', views.my_login, name='my_login'),
     path('admin/', admin.site.urls),
     path('courses/add', views.add_course, name='add_course'),
-    path('users', views.show_users, name='show_users')
+    path('users', views.show_users, name='show_users'),    
+    path('register', views.register, name='register')
 ]

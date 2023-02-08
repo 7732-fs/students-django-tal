@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .models import Course
+from students2.models import Course, Student
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required 
@@ -29,7 +29,14 @@ def add_course(request):
         course.save()
     return render(request, "add_course.html", {"user":request.user })
 
-
 def show_users(request):
     users=User.objects.all()
     return render(request, "users.html", {"users":users})
+
+def register(request):
+    student_name, student_email, student_course=request.GET.values()
+    student=Student.objects.create(name=student_name, email=student_email)
+    print(student_course)
+    course=Course.objects.get(name=student_course)
+    course.students.add(student)
+    return HttpResponse(student.id)
