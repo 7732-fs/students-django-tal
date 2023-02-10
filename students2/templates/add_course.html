@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>Add Course</title>
-</head>
-<body>
-    <div> {{user}}</div>
-    <form action="" method="post">
-        <h1> natan is the best</h1>
+{% extends "base.html" %}
+{% block content %}
 
-        <input type="text" name="course_name" placeholder="Course Name" autofocus>
-        <input type="text" name="description" placeholder="Description">
-        <input type="submit" value="Add Course">
-    </form>
+<div> {{user}}</div>
+<form action="" method="post">
+    <h1> natan is the best</h1>
 
-    <div><br>
-       {{message}}
-    </div>
-</body>
-</html>
+    <input type="text" name="course_name" placeholder="Course Name" autofocus>
+    <input type="text" name="description" placeholder="Description">
+    <input type="submit" value="Add Course">
+</form>
+
+<div><br>
+    {{message}}
+</div>
+
+{% endblock content %}

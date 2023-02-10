@@ -1,0 +1,37 @@
+body {font-family: sans-serif;
+   display: flex;
+   gap: 1%;
+   background-color: #E5E0FF;
+   display: grid;
+}
+
+
+/*
+navbar
+*/
+.navbar {
+   display: flex;
+   gap: 1%;
+   background-color: rgba(154, 187, 250, 0.644);
+   border-radius: 5px;
+   font-size: 30px;
+   list-style-type:none;  
+}
+
+li a {
+   display:block;
+   color: rgb(102, 102, 102);
+   text-align: center;
+   padding: 14px 16px;
+   text-decoration:none;
+}
+
+li a:hover {
+   background-color: rgb(154, 248, 228);
+   border-radius: 5px;
+}
+/*
+and of navbar
+*/
+
+

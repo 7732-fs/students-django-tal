@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="mainForm">
+    <form action="" method="post">
+        <label for="student_name">Name</label>
+        <input type="text" name="student_name" autofocus>
+        <label for="student_email">Email Address</label>
+        <input type="email" name="student_email" id="">
+        <label for="student_grade">Grade</label>
+        <input type="text" name="student_grade" id="">
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+{% endblock content %}
