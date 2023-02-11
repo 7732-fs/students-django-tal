@@ -1,2 +1,3 @@
 *.pyc
 students2/__pycache__/urls.cpython-38.pyc
+db.sqlite3

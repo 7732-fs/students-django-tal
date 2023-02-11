@@ -25,3 +25,11 @@ class User(models.Model):
 
     def __str__(self) -> str:
         return self.username
+
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=256)
+    email = models.EmailField(max_length=256, unique=True)
+
+    def __str__(self) -> str:
+        return self.name

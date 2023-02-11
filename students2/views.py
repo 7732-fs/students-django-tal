@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from .models import Course, User
 from django.db.utils import IntegrityError
-from .models import Course, User, Student
+from .models import Course, User, Student, Teacher
 from django.contrib import messages
 
 
@@ -49,3 +48,28 @@ def add_student(request):
 def show_users(request):
     users = User.objects.all()
     return render(request, "users.html", {"users": users})
+
+
+def add_teacher(request):
+    message = ""
+    try:
+        if request.method == 'POST':
+            name = request.POST["name"]
+            email = request.POST["email"]
+            teacher = Teacher(name=name, email=email)
+            teacher.save()
+            message = f"{name} Added successfully"
+            if "user" in request.session:
+                return render(request, "add_teacher.html", {"user": f'You are logged in as {request.session.get("user")}', "message": message})
+            else:
+                return render(request, "add_teacher.html", {"user": "You are not logged in",  "message": message})
+        else:
+            return render(request, "add_teacher.html", {"user": "You are not logged in",  "message": message})
+    except IntegrityError:
+        message = (f"{name} Already exists")
+        if "user" in request.session:
+            return render(request, "add_teacher.html", {"user": f'You are logged in as {request.session.get("user")}', "message": message})
+        else:
+            return render(request, "add_teacher.html", {"user": "You are not logged in",  "message": message})
+
+######
