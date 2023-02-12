@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
 from students2.models import Course, Student
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.models import User, Permission
+from django.contrib.auth.decorators import login_required, permission_required 
 # Create your views here.
 
 def my_login(request):
@@ -10,6 +10,7 @@ def my_login(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        user.user_permissions.add(Permission.objects.get(codename='add_course'))
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -18,7 +19,8 @@ def my_login(request):
     return render(request, 'login.html')
 
 def home(request):
-    return HttpResponse(f"hi {request.user} login at <a href='/login'>here</a>")
+    user=User.objects.get(username=request.user.username)
+    return HttpResponse(f"hi {user.username} login at <a href='/login'>here</a> your mermisons are {user.has_perm('students2.view_student')}")
 
 @login_required
 def add_course(request):
@@ -29,6 +31,8 @@ def add_course(request):
         course.save()
     return render(request, "add_course.html", {"user":request.user })
 
+@login_required
+@permission_required('students2.view_student')
 def show_users(request):
     users=User.objects.all()
     return render(request, "users.html", {"users":users})
@@ -39,3 +43,4 @@ def register(request):
     course=Course.objects.get(name=student_course)
     course.students.add(student)
     return HttpResponse(student.id)
+
