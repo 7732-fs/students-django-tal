@@ -9,5 +9,19 @@
 <body>
     <h1>{{ course.name }}</h1>
     <h2>{{ course.description }}</h2>
+    <h3>
+        {% for student in students %}
+        <div class="student">
+            {{ student.name}} <a href="/course/{{course.id}}/{{student.id}}">add</a>
+        </div>
+        {% endfor %}
+        <h2>Registered Students</h2>
+        {% for student in registered %}
+        <div class="student">
+            {{ student.name}} 
+        </div>
+        {% endfor %}
+
+    </h3>
 </body>
 </html>

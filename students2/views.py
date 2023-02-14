@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.db.utils import IntegrityError
 from .models import Course, User, Student, Teacher
 from django.contrib import messages
@@ -79,4 +79,13 @@ def show_courses(request):
 
 def show_course(request, course_id):
     course=Course.objects.get(pk=course_id)
-    return render(request, "course.html", {"course":course})
+    students=Student.objects.all()
+    registered=course.students.all()
+    return render(request, "course.html", {"course":course, "students":students, "registered":registered})
+
+def add_student_to_course(request, student_id, course_id):
+    course=Course.objects.get(id=course_id)
+    student=Student.objects.get(id=student_id)
+    course.students.add(student)
+    return redirect(f"/course/{course_id}")
+    
