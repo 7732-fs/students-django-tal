@@ -1,15 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.db.utils import IntegrityError
 from .models import Course, User, Student, Teacher
 from django.contrib import messages
 
-
 # Create your views here.
-
 
 def home(request, methods=["POST ,GET"]):
     return render(request, "home.html")
-
 
 def add_course(request):
     message = ""
@@ -72,4 +69,14 @@ def add_teacher(request):
         else:
             return render(request, "add_teacher.html", {"user": "You are not logged in",  "message": message})
 
-######
+def register(request):
+    student=Student.objects.create(**dict(request.GET.items()))
+    Course.objects.get(name="python").students.add(student)
+    return HttpResponse(student.name)
+
+def show_courses(request):
+    return render(request, "courses.html", {"courses":Course.objects.all()})
+
+def show_course(request, course_id):
+    course=Course.objects.get(pk=course_id)
+    return render(request, "course.html", {"course":course})

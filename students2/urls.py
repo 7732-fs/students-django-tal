@@ -8,8 +8,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('add_student', views.add_student, name='add_student'),
     path('add_teacher', views.add_teacher, name='add_teacher'),
-
+    path('register', views.register, name='register'),
+    path('courses', views.show_courses, name='courses'),
+    path('course/<course_id>', views.show_course, name='course'),
 ]
-
-# this is a comment
-# this is Israel's comment
