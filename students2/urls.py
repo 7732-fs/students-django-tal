@@ -1,8 +1,9 @@
 from django.urls import path
-
+from django.contrib import admin
 from . import views
 
 urlpatterns = [
+    path('admin', admin.site.urls),
     path('courses/add', views.add_course, name='add_course'),
     path('users', views.show_users, name='show_users'),
     path('', views.home, name='home'),
