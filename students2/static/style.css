@@ -44,7 +44,8 @@
 
 .update{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr min-content min-content;
+    grid-column-gap: 20px;
 }
 
 .update:nth-child(1) {

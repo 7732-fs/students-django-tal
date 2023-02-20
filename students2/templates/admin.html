@@ -5,9 +5,9 @@
      <div class="admin">
           {% for obj in objects %}
           <div class="update">
-               <div>{{ obj.name }}</div><input type="button" value="Update"><input type="button" value="Delete">
+               <div>{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>
           </div>
           {% endfor %}
      </div>
-     {% endblock %}
 </div>
+{% endblock %}

@@ -10,6 +10,7 @@ urlpatterns=[
     path('users', views.show_users, name='show_users'),    
     path('register', views.register, name='register'),
     path('students/admin', views.admin, name='students_admin'),
+    path('<obj>/update/<oid>', views.update, name='object_update'),
+    path('<obj>/delete/<oid>', views.delete, name='object_delete'),
     path('students/admin/<obj>', views.admin, name='admin_object')
-    
 ]

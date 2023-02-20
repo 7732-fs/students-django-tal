@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
-
+from django.contrib import messages
  
 
 # Create your views here.
@@ -45,7 +45,11 @@ def show_users(request):
 @permission_required('students2.students_admin')
 def admin(request, obj=""):
     if obj=="students":
-        return render(request, "admin.html", {"objects":Student.objects.all()})
+        return render(request, "admin.html", {"objects":Student.objects.all(), "obj_name":obj})
+    if obj=="courses":
+        return render(request, "admin.html", {"objects":Course.objects.all(),"obj_name":obj})
+    # if obj=="teachers":
+    #     return render(request, "admin.html", {"objects":Teacher.objects.all()})
     return render(request, "admin.html", {"objects":obj})
 
 def register(request):
@@ -55,3 +59,15 @@ def register(request):
     course.students.add(student)
     return HttpResponse(student.id)
 
+def update(request, obj, oid):
+    if obj == "students":
+        return render(request, "update.html", {"object":Student.objects.get(pk=oid)})
+    if obj == "courses":
+        return render(request, "update.html", {"object":Course.objects.get(pk=oid)})
+
+def delete(request, obj, oid):
+    if obj == "students":
+        Student.objects.get(pk=oid).delete()
+    if obj == "courses":
+        Course.objects.get(pk=oid).delete()
+    return redirect(f"/students/admin/{obj}")
