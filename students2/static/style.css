@@ -11,3 +11,54 @@
     content: "Admin Login";
     font-weight: bold;
 }
+
+.navbar-main {
+    display: flex;
+    flex-direction: row;
+    margin: 1vh;
+    width: 100vw;
+    gap: 5em;
+}
+
+.navbar-admin {
+    display: flex;
+    flex-direction: column;
+    margin: 1vh;
+    gap: 1em;
+    border-right: 1px solid black;
+    max-width: max-content;
+    padding-right: 1em;
+}
+
+
+.navbar-main > a {
+    text-decoration: none;
+    font-size: large;
+    color: black;
+}
+
+.navbar-main > a:hover {
+    background-color: green;
+    color: white;
+}
+
+.update{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.update:nth-child(1) {
+    grid-column: 1;
+}
+
+.update:nth-child(2) {
+    grid-column: 2;
+}
+
+.update:nth-child(3) {
+    grid-column: 3;
+}
+
+.delete {
+    grid-column: 2;
+}

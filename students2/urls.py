@@ -8,5 +8,8 @@ urlpatterns=[
     path('admin/', admin.site.urls),
     path('courses/add', views.add_course, name='add_course'),
     path('users', views.show_users, name='show_users'),    
-    path('register', views.register, name='register')
+    path('register', views.register, name='register'),
+    path('students/admin', views.admin, name='students_admin'),
+    path('students/admin/<obj>', views.admin, name='admin_object')
+    
 ]

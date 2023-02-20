@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="display: flex">
+     {% include 'navbar-admin.html' %}
+     <div class="admin">
+          {% for obj in objects %}
+          <div class="update">
+               <div>{{ obj.name }}</div><input type="button" value="Update"><input type="button" value="Delete">
+          </div>
+          {% endfor %}
+     </div>
+     {% endblock %}
+</div>
