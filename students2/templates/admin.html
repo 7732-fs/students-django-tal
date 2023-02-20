@@ -3,6 +3,7 @@
 <div style="display: flex">
      {% include 'navbar-admin.html' %}
      <div class="admin">
+          <a href="/{{obj_name}}/add">Add</a>
           {% for obj in objects %}
           <div class="update">
                <div>{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>

@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect, HttpResponse
-from students2.models import Course, Student
+from students2.models import Course, Student, Teacher
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
- 
+from students2.forms import StudentForm, CourseForm, TeacherForm
+
 
 # Create your views here.
 
 def my_login(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
@@ -21,53 +22,71 @@ def my_login(request):
             raise PermissionDenied()
     return render(request, 'login.html')
 
-def home(request):
-    user=User.objects.get(username=request.user.username)
-    return render(request, 'home.html', {user:user})
 
-@login_required
-@permission_required('students2.add_student')
-def add_course(request):
-    if request.method=='POST':
-        name=request.POST["course_name"]
-        description=request.POST["description"]
-        course=Course(name=name, description=description)
-        course.save()
-    return render(request, "add_course.html", {"user":request.user })
+def home(request):
+    user = User.objects.get(username=request.user.username)
+    return render(request, 'home.html', {user: user})
+
+
 
 @login_required
 @permission_required('students2.view_student')
 def show_users(request):
-    users=User.objects.all()
-    return render(request, "users.html", {"users":users})
+    users = User.objects.all()
+    return render(request, "users.html", {"users": users})
+
 
 @login_required
 @permission_required('students2.students_admin')
 def admin(request, obj=""):
-    if obj=="students":
-        return render(request, "admin.html", {"objects":Student.objects.all(), "obj_name":obj})
-    if obj=="courses":
-        return render(request, "admin.html", {"objects":Course.objects.all(),"obj_name":obj})
-    # if obj=="teachers":
-    #     return render(request, "admin.html", {"objects":Teacher.objects.all()})
-    return render(request, "admin.html", {"objects":obj})
+    if obj == "students":
+        return render(request, "admin.html", {"objects": Student.objects.all(), "obj_name": obj})
+    if obj == "courses":
+        return render(request, "admin.html", {"objects": Course.objects.all(), "obj_name": obj})
+    if obj == "teachers":
+        return render(request, "admin.html", {"objects": Teacher.objects.all(), "obj_name": obj})
+    return render(request, "admin.html", {"objects": obj})
+
 
 def register(request):
-    student_name, student_email, student_course=request.GET.values()
-    student=Student.objects.create(name=student_name, email=student_email)
-    course=Course.objects.get(name=student_course)
+    student_name, student_email, student_course = request.GET.values()
+    student = Student.objects.create(name=student_name, email=student_email)
+    course = Course.objects.get(name=student_course)
     course.students.add(student)
     return HttpResponse(student.id)
 
+
+@login_required
+@permission_required('students2.students_admin')
 def update(request, obj, oid):
     if obj == "students":
-        return render(request, "update.html", {"object":Student.objects.get(pk=oid)})
+        return render(request, "update.html", {"object": Student.objects.get(pk=oid)})
     if obj == "courses":
-        return render(request, "update.html", {"object":Course.objects.get(pk=oid)})
+        return render(request, "update.html", {"object": Course.objects.get(pk=oid)})
 
+
+@login_required
+@permission_required('students2.students_admin')
 def delete(request, obj, oid):
     if obj == "students":
         Student.objects.get(pk=oid).delete()
     if obj == "courses":
         Course.objects.get(pk=oid).delete()
     return redirect(f"/students/admin/{obj}")
+
+
+@login_required
+@permission_required('students2.students_admin')
+def add(request, obj):
+    if obj == "students":
+        form = StudentForm(request.POST)
+    if obj == "courses":
+        form = CourseForm(request.POST)
+    if obj == "teachers":
+        form = TeacherForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect(f"/students/admin/{obj}")
+    else:
+        return render(request, 'add.html', {"form": form})
