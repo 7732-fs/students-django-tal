@@ -1,4 +1,6 @@
-{% extends 'base.html' %}
-{% block content %}
-update {{ object.name }}
-{% endblock %}
+<form method="post">
+     {{ form.as_p }}
+     <button type="submit">Update</button>
+ </form>
+ 
+ 

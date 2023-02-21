@@ -6,9 +6,12 @@
           <h1>{{obj_name.capitalize}} Manager</h1>
           <a href="/{{obj_name}}/add">Add new {{obj_name}}</a>
           <hr>
+          <input type="text" placeholder="Filter" id='filter'>
+          <hr>
+          <script src="/static/filter.js" defer></script>
           {% for obj in objects %}
           <div class="update">
-               <div>{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>
+               <div class="obj_name">{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>
           </div>
           {% endfor %}
      </div>

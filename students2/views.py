@@ -53,7 +53,19 @@ def register(request):
 @login_required
 @permission_required('students2.students_admin')
 def update(request, obj, oid):
-    return render(request, "update.html", {"object": apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid)})
+    model=apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid)
+    if obj == "students":
+        form = StudentForm(request.POST, instance=model)
+    if obj == "courses":
+        form = CourseForm(request.POST, instance=model)
+    if obj == "teachers":
+        form = TeacherForm(request.POST, instance=model)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect(f"/students/admin/{obj}")
+    else:
+        return render(request, 'update.html', {"form": StudentForm(instance=model)})
 
 
 @login_required
@@ -78,3 +90,4 @@ def add(request, obj):
             return redirect(f"/students/admin/{obj}")
     else:
         return render(request, 'add.html', {"form": form})
+
