@@ -49,23 +49,24 @@ def register(request):
     course.students.add(student)
     return HttpResponse(student.id)
 
+form_dict={
+    "students":StudentForm,
+    "courses":CourseForm,
+    "teachers":TeacherForm
+}
 
 @login_required
 @permission_required('students2.students_admin')
 def update(request, obj, oid):
     model=apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid)
-    if obj == "students":
-        form = StudentForm(request.POST, instance=model)
-    if obj == "courses":
-        form = CourseForm(request.POST, instance=model)
-    if obj == "teachers":
-        form = TeacherForm(request.POST, instance=model)
+    form=form_dict[obj](instance=model)
     if request.method == 'POST':
+        form=form_dict[obj](request.POST, instance=model)
         if form.is_valid():
             form.save()
             return redirect(f"/students/admin/{obj}")
     else:
-        return render(request, 'update.html', {"form": StudentForm(instance=model)})
+        return render(request, 'update.html', {"form": form})
 
 
 @login_required
