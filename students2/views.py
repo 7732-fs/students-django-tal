@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from students2.models import Course, Student, Teacher
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
@@ -10,6 +10,12 @@ from django.apps import apps
 
 # Create your views here.
 
+form_dict={
+    "students":StudentForm,
+    "courses":CourseForm,
+    "teachers":TeacherForm
+}
+
 def my_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -17,17 +23,22 @@ def my_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect(request.path)
         else:
             raise PermissionDenied()
     return render(request, 'login.html')
 
 
 def home(request):
-    user = User.objects.get(username=request.user.username)
+    try:
+        user = User.objects.get(username=request.user.username)
+    except:
+        user="Anonymous User"
     return render(request, 'home.html', {user: user})
 
-
+def logmeout(request):
+    logout(request)
+    return redirect('home')
 
 @login_required
 @permission_required('students2.view_student')
@@ -39,7 +50,8 @@ def show_users(request):
 @login_required
 @permission_required('students2.students_admin')
 def admin(request, obj="students"):
-    return render(request, "admin.html", {"objects": apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.all(), "obj_name": obj})
+    add_form=form_dict[obj]()
+    return render(request, "admin.html", {"objects": apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.all(), "obj_name": obj, "form":add_form})
 
 
 def register(request):
@@ -49,11 +61,7 @@ def register(request):
     course.students.add(student)
     return HttpResponse(student.id)
 
-form_dict={
-    "students":StudentForm,
-    "courses":CourseForm,
-    "teachers":TeacherForm
-}
+
 
 @login_required
 @permission_required('students2.students_admin')
