@@ -63,3 +63,7 @@
 .delete {
     grid-column: 2;
 }
+
+.admin{
+    padding-left: 1em;
+}

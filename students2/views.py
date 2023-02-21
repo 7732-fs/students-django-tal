@@ -38,14 +38,8 @@ def show_users(request):
 
 @login_required
 @permission_required('students2.students_admin')
-def admin(request, obj=""):
-    if obj == "students":
-        return render(request, "admin.html", {"objects": Student.objects.all(), "obj_name": obj})
-    if obj == "courses":
-        return render(request, "admin.html", {"objects": Course.objects.all(), "obj_name": obj})
-    if obj == "teachers":
-        return render(request, "admin.html", {"objects": Teacher.objects.all(), "obj_name": obj})
-    return render(request, "admin.html", {"objects": obj})
+def admin(request, obj="students"):
+    return render(request, "admin.html", {"objects": apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.all(), "obj_name": obj})
 
 
 def register(request):
@@ -65,10 +59,7 @@ def update(request, obj, oid):
 @login_required
 @permission_required('students2.students_admin')
 def delete(request, obj, oid):
-    if obj == "students":
-        Student.objects.get(pk=oid).delete()
-    if obj == "courses":
-        Course.objects.get(pk=oid).delete()
+    apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid).delete()
     return redirect(f"/students/admin/{obj}")
 
 
