@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from students2.forms import StudentForm, CourseForm, TeacherForm
-
+from django.apps import apps
 
 # Create your views here.
 
@@ -59,10 +59,7 @@ def register(request):
 @login_required
 @permission_required('students2.students_admin')
 def update(request, obj, oid):
-    if obj == "students":
-        return render(request, "update.html", {"object": Student.objects.get(pk=oid)})
-    if obj == "courses":
-        return render(request, "update.html", {"object": Course.objects.get(pk=oid)})
+    return render(request, "update.html", {"object": apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid)})
 
 
 @login_required
