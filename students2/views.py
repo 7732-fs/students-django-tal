@@ -10,11 +10,12 @@ from django.apps import apps
 
 # Create your views here.
 
-form_dict={
-    "students":StudentForm,
-    "courses":CourseForm,
-    "teachers":TeacherForm
+form_dict = {
+    "students": StudentForm,
+    "courses": CourseForm,
+    "teachers": TeacherForm
 }
+
 
 def my_login(request):
     if request.method == 'POST':
@@ -33,12 +34,14 @@ def home(request):
     try:
         user = User.objects.get(username=request.user.username)
     except:
-        user="Anonymous User"
+        user = "Anonymous User"
     return render(request, 'home.html', {user: user})
+
 
 def logmeout(request):
     logout(request)
     return redirect('home')
+
 
 @login_required
 @permission_required('students2.view_student')
@@ -50,8 +53,8 @@ def show_users(request):
 @login_required
 @permission_required('students2.students_admin')
 def admin(request, obj="students"):
-    add_form=form_dict[obj]()
-    return render(request, "admin.html", {"objects": apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.all(), "obj_name": obj, "form":add_form})
+    add_form = form_dict[obj]()
+    return render(request, "admin.html", {"objects": apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.all(), "obj_name": obj, "form": add_form})
 
 
 def register(request):
@@ -62,14 +65,14 @@ def register(request):
     return HttpResponse(student.id)
 
 
-
 @login_required
 @permission_required('students2.students_admin')
 def update(request, obj, oid):
-    model=apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid)
-    form=form_dict[obj](instance=model)
+    model = apps.get_model(
+        model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid)
+    form = form_dict[obj](instance=model)
     if request.method == 'POST':
-        form=form_dict[obj](request.POST, instance=model)
+        form = form_dict[obj](request.POST, instance=model)
         if form.is_valid():
             form.save()
             return redirect(f"/students/admin/{obj}")
@@ -80,7 +83,8 @@ def update(request, obj, oid):
 @login_required
 @permission_required('students2.students_admin')
 def delete(request, obj, oid):
-    apps.get_model(model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid).delete()
+    apps.get_model(model_name=obj[:-1].capitalize(),
+                   app_label="students2").objects.get(pk=oid).delete()
     return redirect(f"/students/admin/{obj}")
 
 
@@ -100,3 +104,17 @@ def add(request, obj):
     else:
         return render(request, 'add.html', {"form": form})
 
+
+def search(request):
+    q = request.GET.get("q", "")
+    student_results = (Student.objects.filter(
+        name__istartswith=q) | Student.objects.filter(email__istartswith=q)) or ["No results"]
+    course_results = Course.objects.filter(
+        name__istartswith=q) | Course.objects.filter(description__icontains=q)
+    teacher_results = Teacher.objects.filter(
+        name__startswith=q) | Teacher.objects.filter(email__startswith=q)
+    return render(request, "search.html", {
+        "students": student_results,
+        "courses": course_results,
+        "teachers": teacher_results
+    })

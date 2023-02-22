@@ -8,6 +8,7 @@ urlpatterns=[
     path('logout', views.logmeout, name='logout'),
     path('admin/', admin.site.urls),
     path('users', views.show_users, name='show_users'),    
+    path('search', views.search, name='search'),    
     path('register', views.register, name='register'),
     path('students/admin', views.admin, name='students_admin'),
     path('<obj>/add/', views.add, name='object_add'),

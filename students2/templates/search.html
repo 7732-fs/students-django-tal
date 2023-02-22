@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="results">
+    <div class="students">
+        Results for Students
+        {% for student in students %}
+            <div class="student">{{ student.name|default:student }}</div>
+        {% endfor %}
+    </div>
+    <div class="courses">
+        {% for course in courses %}
+            <div class="course">{{ course.name }}</div>
+        {% endfor %}
+    </div>
+    <div class="teachers">
+        {% for teacher in teachers %}
+            <div class="teacher">{{ teacher.name }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
