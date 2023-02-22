@@ -3,7 +3,9 @@
      <a href="/courses">Courses</a>
      <a href="/teachers">Teachers</a>
      <a href="/students/admin">Admin</a>
-     <input type="text" placeholder="Search">
+     <form action="/search">
+          <input type="text" name="q" placeholder="Search" onchange="submit()">
+     </form>
      You are logged in as {{ user }}    
      <a href="/logout">Log Out</a>
 </div>
