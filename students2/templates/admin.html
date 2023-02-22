@@ -12,7 +12,7 @@
           <script src="/static/filter.js" defer></script>
           {% for obj in objects %}
           <div class="item">
-               <div class="obj_name">{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>
+               <div class="{{obj_name}}">{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>
           </div>
           {% endfor %}
      </div>
