@@ -5,7 +5,7 @@ from django.db import models
 class Student(models.Model):
     name = models.CharField(max_length=256)
     email = models.CharField(max_length=256)
-    grade = models.IntegerField(default=0)
+    image=models.ImageField(upload_to='media/')
 
 
 class Course(models.Model):

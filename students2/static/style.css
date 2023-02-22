@@ -12,6 +12,17 @@
     font-weight: bold;
 }
 
+.logo {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: oblique;
+    font-size: x-large;
+    border-bottom: 1px dotted black;
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+    padding-left: 0.5em;
+}
+
 .navbar-main {
     display: flex;
     flex-direction: row;

@@ -92,15 +92,17 @@ def delete(request, obj, oid):
 @permission_required('students2.students_admin')
 def add(request, obj):
     if obj == "students":
-        form = StudentForm(request.POST)
+        form = StudentForm(request.POST, request.FILES)
     if obj == "courses":
-        form = CourseForm(request.POST)
+        form = CourseForm(request.POST, request.FILES)
     if obj == "teachers":
-        form = TeacherForm(request.POST)
+        form = TeacherForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
             return redirect(f"/students/admin/{obj}")
+        else:
+            print(form.errors)
     else:
         return render(request, 'add.html', {"form": form})
 
