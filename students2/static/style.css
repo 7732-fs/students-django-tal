@@ -76,7 +76,14 @@
 }
 
 .admin{
+    display: grid;
+    grid-template-columns: max-content max-content;
     padding-left: 1em;
+    gap: 1em;
+}
+
+h1 {
+    grid-column: span 2;
 }
 
 .results {

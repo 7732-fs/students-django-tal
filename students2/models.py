@@ -7,6 +7,9 @@ class Student(models.Model):
     email = models.CharField(max_length=256)
     image=models.ImageField(upload_to='media/')
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Course(models.Model):
     name=models.CharField(max_length=256, unique=True)

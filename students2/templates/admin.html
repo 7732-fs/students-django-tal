@@ -4,17 +4,21 @@
      {% include 'navbar-admin.html' %}
      <div class="admin">
           <h1>{{obj_name.capitalize}} Manager</h1>
-          <a href="/{{obj_name}}/add">Add new {{obj_name}}</a>
-          {% include "add.html" %}
-          <hr>
-          <input type="text" placeholder="Filter" id='filter' autofocus>
-          <hr>
-          <script src="/static/filter.js" defer></script>
-          {% for obj in objects %}
-          <div class="item">
-               <div class="{{obj_name}}">{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>
+          <div class="admin_add">
+               Add new {{obj_name}}
+               {% include "add.html" %}
+               <hr>
           </div>
-          {% endfor %}
+          <div class="admin_list">
+               <input type="text" placeholder="Filter" id='filter' autofocus>
+               <hr>
+               <script src="/static/filter.js" defer></script>
+               {% for obj in objects %}
+               <div class="item">
+                    <div class="{{obj_name}}_admin">{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>
+               </div>
+               {% endfor %}
+          </div>
      </div>
 </div>
 {% endblock %}
