@@ -8,13 +8,15 @@
         {% endfor %}
     </div>
     <div class="courses">
+        Results for Courses
         {% for course in courses %}
-            <div class="course">{{ course.name }}</div>
+            <div class="course">{{ course.name|default:course }}</div>
         {% endfor %}
     </div>
     <div class="teachers">
+        Results for Teachers
         {% for teacher in teachers %}
-            <div class="teacher">{{ teacher.name }}</div>
+            <div class="teacher">{{ teacher.name|default:teacher }}</div>
         {% endfor %}
     </div>
 </div>

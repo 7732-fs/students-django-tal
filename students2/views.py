@@ -109,10 +109,10 @@ def search(request):
     q = request.GET.get("q", "")
     student_results = (Student.objects.filter(
         name__istartswith=q) | Student.objects.filter(email__istartswith=q)) or ["No results"]
-    course_results = Course.objects.filter(
-        name__istartswith=q) | Course.objects.filter(description__icontains=q)
-    teacher_results = Teacher.objects.filter(
-        name__startswith=q) | Teacher.objects.filter(email__startswith=q)
+    course_results = (Course.objects.filter(
+        name__istartswith=q) | Course.objects.filter(description__icontains=q)) or ["No results"]
+    teacher_results = (Teacher.objects.filter(
+        name__startswith=q) | Teacher.objects.filter(email__startswith=q)) or ["No results"]
     return render(request, "search.html", {
         "students": student_results,
         "courses": course_results,

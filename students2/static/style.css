@@ -42,7 +42,7 @@
     color: white;
 }
 
-.update{
+.item{
     display: grid;
     grid-template-columns: 1fr min-content min-content;
     grid-column-gap: 20px;
