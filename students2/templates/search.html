@@ -4,7 +4,10 @@
     <div class="students">
         Results for Students
         {% for student in students %}
-            <div class="student">{{ student.name|default:student }}</div>
+            <div class="student">
+                {{ student.name|default:student }}
+                <img src="{{ student.image.url }}" alt="My Image">
+            </div>
         {% endfor %}
     </div>
     <div class="courses">
