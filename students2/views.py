@@ -24,9 +24,10 @@ def my_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(request.path)
+            return redirect(request.session['next'])
         else:
             raise PermissionDenied()
+    request.session['next'] = request.GET.get("next", "/")
     return render(request, 'login.html')
 
 
@@ -100,6 +101,7 @@ def add(request, obj):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
+            User.objects.create_user(email=form.cleaned_data["email"],username=form.cleaned_data["email"], password=form.cleaned_data["name"]+"123")
             return redirect(f"/students/admin/{obj}")
         else:
             print(form.errors)
