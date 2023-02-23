@@ -13,7 +13,7 @@
     <div class="courses">
         Results for Courses
         {% for course in courses %}
-            <div class="course">{{ course.name|default:course }}</div>
+            {% include 'course-card.html' %}
         {% endfor %}
     </div>
     <div class="teachers">

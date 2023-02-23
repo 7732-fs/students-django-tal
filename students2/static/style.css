@@ -8,7 +8,6 @@
 }
 
 .login::before {
-    content: "Admin Login";
     font-weight: bold;
 }
 
@@ -86,6 +85,10 @@ h1 {
     grid-column: span 2;
 }
 
+.title {
+    margin: 1em;
+    font-size: x-large;
+}
 .results {
     margin-left: 3em;
     margin-top: 1em;
@@ -110,16 +113,47 @@ h1 {
     box-shadow: 0px 0px 7px rgb(204, 202, 202);
     max-width: 10em;
     padding: 1em;
+    gap: 1em;
 }
 
 .courses {
     grid-column: 2;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border-right: 1px solid;
     padding-right: 1em;
     gap: 1em;
+    margin: 1em;
 }
+
+
+.course {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 15px rgb(182, 179, 179);    
+    width: max-content;
+    padding: 1em;
+    gap: 1em;
+    margin: 1em;
+}
+
+.course_name {
+    font-size: x-large;
+}
+
+[class^="course_"]::first-letter {
+    text-transform: capitalize;
+}
+
+.course_teacher{
+    text-transform: capitalize;
+}
+
+.course img {
+    max-width: 200px;
+    min-height: 200px;
+}
+
 
 .teachers {
     grid-column: 3;
@@ -129,3 +163,8 @@ h1 {
     border-right: 1px solid;
     padding-right: 1em;
 }
+
+.update_form {
+    grid-column: 2;
+}
+

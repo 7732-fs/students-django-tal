@@ -24,7 +24,10 @@ def my_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(request.session['next'])
+            if user.username=="admin":
+                return redirect('students_admin')
+            app_user=Student.objects.get(name=user.email)
+            return redirect(f"/student/{app_user.id}")
         else:
             raise PermissionDenied()
     request.session['next'] = request.GET.get("next", "/")
@@ -50,6 +53,21 @@ def show_users(request):
     users = User.objects.all()
     return render(request, "users.html", {"users": users})
 
+@login_required
+def student(request, sid=0):
+    students=Student.objects.all()
+    student=Student.objects.filter(pk=sid).first() or User.objects.get(username="admin")
+    return render(request, "student.html", {"student":student, "students":students})
+    
+def courses(request):
+    courses=Course.objects.all()
+    return render(request, "courses.html", {"courses":courses})
+
+@login_required
+def course(request, cid=0):
+    courses=Course.objects.all()
+    course=Course.objects.get(pk=cid)
+    return render(request, "course.html", {"course":student, "courses":courses})
 
 @login_required
 @permission_required('students2.students_admin')
@@ -73,12 +91,12 @@ def update(request, obj, oid):
         model_name=obj[:-1].capitalize(), app_label="students2").objects.get(pk=oid)
     form = form_dict[obj](instance=model)
     if request.method == 'POST':
-        form = form_dict[obj](request.POST, instance=model)
+        form = form_dict[obj](request.POST, request.FILES, instance=model)
         if form.is_valid():
             form.save()
             return redirect(f"/students/admin/{obj}")
     else:
-        return render(request, 'update.html', {"form": form})
+        return render(request, 'update.html', {"form": form, "obj_name":obj, "oid":oid})
 
 
 @login_required
@@ -100,8 +118,9 @@ def add(request, obj):
         form = TeacherForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
+            if obj=="students":
+                User.objects.create_user(email=form.cleaned_data["email"],username=form.cleaned_data["email"], password="1234")
             form.save()
-            User.objects.create_user(email=form.cleaned_data["email"],username=form.cleaned_data["email"], password=form.cleaned_data["name"]+"123")
             return redirect(f"/students/admin/{obj}")
         else:
             print(form.errors)

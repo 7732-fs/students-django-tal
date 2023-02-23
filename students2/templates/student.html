@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="greeting">
+     <h1>Hello {{student }}!</h1>
+</div>
+<div class="student">
+     <img src="/media/{{student.image}}" alt="">
+</div>
+<div class="courses">
+Your courses:
+{{ student.course_set}}
+</div>
+{% endblock  %}
+

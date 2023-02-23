@@ -1,6 +1,15 @@
-<form class="update_form" method="post">
-     {{ form.as_p }}
-     <button type="submit">Update</button>
- </form>
- 
- 
+{% extends 'base.html' %}
+{% block content %}
+<div class="admin">
+
+    {% include 'navbar-admin.html' %}
+    <div>
+        <h1>Update {{form.name.value}}</h1> 
+        
+        <form class="update_form" method="post" action="/{{obj_name}}/update/{{oid}}" enctype="multipart/form-data">
+         {{ form.as_p }}
+         <button type="submit">Update</button>
+         </form>
+    </div>
+</div>
+ {% endblock  %}
