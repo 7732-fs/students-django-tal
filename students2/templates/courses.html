@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="title">
-          Courses This Season
-          
-     </div>
-<div class="courses">
-{% for course in courses %}
-     {% include 'course-card.html' %}
-{% endfor %}
+     Courses This Season
+
+</div>
+<div class="page">
+     {% for course in courses %}
+          {% include 'course-card.html' %}
+     {% endfor %}
 </div>
 {% endblock %}

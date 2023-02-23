@@ -55,6 +55,19 @@ body{
     color: white;
 }
 
+.page {
+    display: flex;
+    flex-direction: row;
+    gap: 2vh;
+    flex-wrap: wrap;
+    
+}
+
+.page div {
+    max-width: max-content;
+    margin: 1vw;
+}
+
 .item{
     display: grid;
     grid-template-columns: 1fr min-content min-content;

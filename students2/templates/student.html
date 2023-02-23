@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<script src="/static/filter.js" defer></script>
 {% if student %}
      <div class="greeting">
      <h1>{{student }} Page</h1>
@@ -21,8 +22,11 @@
 </div>
 {% else %}
 <div class="title">Our Students</div>
-     {% for student in students %}
-     {% include 'student-card.html' %}
-     {% endfor %}
+<input type="text" id="filter" placeholder="Search">
+<div class="page">
+          {% for student in students %}
+          {% include 'student-card.html' %}
+          {% endfor %}
+     </div>
 {% endif %}
 {% endblock %}
