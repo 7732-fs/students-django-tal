@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="title">
+          Our teachers
+     </div>
+<div class="teachers">
+{% for teacher in teachers %}
+     <div class="teacher">
+          <div class="teacher_image"><img src="/media/{{ teacher.image}}" alt=""></div>
+          <div class="teacher_name">{{ teacher.name}}</div>
+          <div class="teacher_description">{{ teacher.description }}</div>
+          {% for courses in teacher.course_set.all %}
+               <div class="title">{{ course.name}}</div>
+          {% endfor %}
+     </div>
+{% endfor %}
+</div>
+{% endblock %}

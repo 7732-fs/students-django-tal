@@ -56,18 +56,27 @@ def show_users(request):
 @login_required
 def student(request, sid=0):
     students=Student.objects.all()
-    student=Student.objects.filter(pk=sid).first() or User.objects.get(username="admin")
+    student=Student.objects.filter(pk=sid).first()
     return render(request, "student.html", {"student":student, "students":students})
     
 def courses(request):
     courses=Course.objects.all()
     return render(request, "courses.html", {"courses":courses})
 
-@login_required
 def course(request, cid=0):
     courses=Course.objects.all()
     course=Course.objects.get(pk=cid)
-    return render(request, "course.html", {"course":student, "courses":courses})
+    return render(request, "course.html", {"course":course, "courses":courses})
+
+@login_required
+def teacher(request, tid=0):
+    teachers=Teacher.objects.all()
+    student=Teacher.objects.filter(pk=tid).first() or User.objects.get(username="admin")
+    return render(request, "teacher.html", {"teacher":teacher, "teachers":teachers})
+    
+def teachers(request):
+    teachers=Course.objects.all()
+    return render(request, "teachers.html", {"teachers":teachers})
 
 @login_required
 @permission_required('students2.students_admin')
@@ -131,11 +140,11 @@ def add(request, obj):
 def search(request):
     q = request.GET.get("q", "")
     student_results = (Student.objects.filter(
-        name__istartswith=q) | Student.objects.filter(email__istartswith=q)) or ["No results"]
+        name__istartswith=q) | Student.objects.filter(email__istartswith=q)) 
     course_results = (Course.objects.filter(
-        name__istartswith=q) | Course.objects.filter(description__icontains=q)) or ["No results"]
+        name__istartswith=q) | Course.objects.filter(description__icontains=q))
     teacher_results = (Teacher.objects.filter(
-        name__startswith=q) | Teacher.objects.filter(email__startswith=q)) or ["No results"]
+        name__startswith=q) | Teacher.objects.filter(email__startswith=q)) 
     return render(request, "search.html", {
         "students": student_results,
         "courses": course_results,

@@ -1,0 +1,6 @@
+<div class="teacher">
+     <a href="/teacher/{{teacher.id}}">{{ teacher.name|default:teacher }}</a>
+     {% if teacher.image %}
+     <img src="{{ teacher.image.url }}" alt="My Image">
+     {% endif %}
+ </div>

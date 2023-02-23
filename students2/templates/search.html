@@ -1,25 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="title">Search Results</div>
 <div class="results">
-    <div class="students">
-        Results for Students
+    <div class="students" style="width:100%">
         {% for student in students %}
-            <div class="student">
-                {{ student.name|default:student }}
-                <img src="{{ student.image.url }}" alt="My Image">
-            </div>
-        {% endfor %}
+            {% include "student-card.html" %}
+        {% empty %}
+            {% endfor %}
     </div>
-    <div class="courses">
-        Results for Courses
+    <div class="courses" style="flex-direction: column">
         {% for course in courses %}
             {% include 'course-card.html' %}
+            {% empty %}
         {% endfor %}
     </div>
     <div class="teachers">
-        Results for Teachers
         {% for teacher in teachers %}
-            <div class="teacher">{{ teacher.name|default:teacher }}</div>
+           {% include 'teacher-card.html' %}
+            {% empty %}
         {% endfor %}
     </div>
 </div>

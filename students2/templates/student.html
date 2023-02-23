@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="greeting">
-     <h1>Hello {{student }}!</h1>
+{% if student %}
+     <div class="greeting">
+     <h1>{{student }} Page</h1>
 </div>
-<div class="student">
+     {% if student.image %}
      <img src="/media/{{student.image}}" alt="">
+     {% endif %}
+<div >
+     {% if student.course_set.all %}
+     <div class="title">Your courses:</div>
+     {% for course in student.course_set.all %}
+     <div class="courses-list">
+          <div> {{ course.name }}</div>
+          <div>Teacher: {{course.teacher_set.all.first|default:"No teacher assigned yet"}}</div>
+     </div>
+     {% endfor %}
+     {% endif %}
 </div>
-<div class="courses">
-Your courses:
-{{ student.course_set}}
 </div>
-{% endblock  %}
-
+{% else %}
+<div class="title">Our Students</div>
+     {% for student in students %}
+     {% include 'student-card.html' %}
+     {% endfor %}
+{% endif %}
+{% endblock %}

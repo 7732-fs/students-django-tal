@@ -25,6 +25,11 @@ class Teacher(models.Model):
     name = models.CharField(max_length=256)
     email = models.CharField(max_length=256)
     courses=models.ManyToManyField(Course)
+    image=models.ImageField(upload_to='media/')
+
+    def __str__(self) -> str:
+        return self.name
+
 
 
 class User(models.Model):

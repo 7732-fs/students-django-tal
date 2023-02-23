@@ -6,14 +6,7 @@
      </div>
 <div class="courses">
 {% for course in courses %}
-     <div class="course">
-          <div class="course_image"><img src="/media/{{ course.image}}" alt=""></div>
-          <div class="course_name">{{ course.name}}</div>
-          <div class="course_description">{{ course.description }}</div>
-          {% for teacher in course.teacher_set.all %}
-          <div class="course_teacher">Instructor: {{ teacher.name }}</div>
-          {% endfor %}
-     </div>
+     {% include 'course-card.html' %}
 {% endfor %}
 </div>
 {% endblock %}
