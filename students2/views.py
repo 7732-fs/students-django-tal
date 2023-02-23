@@ -75,7 +75,7 @@ def teacher(request, tid=0):
     return render(request, "teacher.html", {"teacher":teacher, "teachers":teachers})
     
 def teachers(request):
-    teachers=Course.objects.all()
+    teachers=Teacher.objects.all()
     return render(request, "teachers.html", {"teachers":teachers})
 
 @login_required
