@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, permission_required 
+from students2.forms import StudentForm
 
 # Create your views here.
 
@@ -76,7 +77,8 @@ def admin(request):
     return render(request, "admin.html")
 
 def student_admin(request):
-    return render(request, "students-admin.html")
+    form = StudentForm()
+    return render(request, "students-admin.html", {"form":form})
 
 def add_teacher(request):
     message = ""
