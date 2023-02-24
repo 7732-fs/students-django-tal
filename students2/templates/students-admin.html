@@ -3,8 +3,8 @@
 <div class="admin_page">
     {% include 'navbar-admin.html' %}
     <div class="admin_forms">
-        <form action="" method="post">
-            {{ form }}
+        <form action="/add_student" method="post">
+            {{ form.as_p }}
             <input type="submit" value="Add">
         </form>
     </div>    
