@@ -5,9 +5,11 @@ from django.db import models
 
 class Student(models.Model):
     name = models.CharField(max_length=256)
-    email = models.CharField(max_length=256)
-    grade = models.IntegerField(default=0)
+    email = models.EmailField(max_length=256)
     
+    def __str__(self) -> str:
+        return self.name
+
 
 class Course(models.Model):
     name = models.CharField(max_length=256, unique=True)

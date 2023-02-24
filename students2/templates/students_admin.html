@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin_page">
+    {% include "admin_navbar.html" %}
+    <div class="admin_forms">
+        <form action="/add_student" method="post">
+            {{ form }}
+            <input type="submit" value="Add">
+        </form>
+    </div>
+
+</div>
+
+{% endblock content %}

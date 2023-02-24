@@ -1,8 +1,8 @@
-body {font-family: sans-serif;
-   display: flex;
+body {
+   font-family: sans-serif;
    gap: 1%;
    background-color: #E5E0FF;
-   display: grid;
+
 }
 
 
@@ -12,26 +12,50 @@ navbar
 .navbar {
    display: flex;
    gap: 1%;
-   background-color: rgba(154, 187, 250, 0.644);
+   background-color: rgba(0, 0, 0,0.9);
    border-radius: 5px;
    font-size: 30px;
    list-style-type:none;  
 }
 
+.admin_page {
+   display: grid;
+   grid-template-columns: max-content max-content ;
+   gap: 1vw;
+   margin-top: 5vh;
+}
+
+.admin_forms * {
+   display: block;
+    margin-block-start: 5px;
+    margin-block-end: 5px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.admin_page:nth-child(1) {
+   grid-column: 1;
+   
+}
+
+.admin_page:nth-child(2) {
+   grid-column: 2;
+   
+}
 li a {
    display:block;
    color: rgb(102, 102, 102);
    text-align: center;
    padding: 14px 16px;
    text-decoration:none;
+
 }
 
 li a:hover {
-   background-color: rgb(154, 248, 228);
-   border-radius: 5px;
+   border-radius: 3px;
+   box-shadow:inset  0px 5px 5px  rgb(255, 255, 255);
 }
-/*
-and of navbar
-*/
+
+
 
 
