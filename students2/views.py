@@ -9,7 +9,13 @@ from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 
 def home(request, methods=["POST ,GET"]):
-    return render(request, "home.html")
+    if request.user.username!='':
+        logout_button = "Log Out"
+        link="/logout"
+    else:
+        logout_button = "Log In"
+        link="/login"
+    return render(request, "home.html", {"logout_button":logout_button, "link":link} )
 
 def app_login(request):
     if request.method=='POST':
@@ -66,6 +72,11 @@ def show_users(request):
     users = User.objects.all()
     return render(request, "users.html", {"users": users})
 
+def admin(request):
+    return render(request, "admin.html")
+
+def student_admin(request):
+    return render(request, "students-admin.html")
 
 def add_teacher(request):
     message = ""
