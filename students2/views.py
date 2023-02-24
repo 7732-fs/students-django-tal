@@ -55,19 +55,16 @@ def add_course(request):
         message = (f"{name} Already exists")
         return render(request, "add_course.html", {"user": request.session.get("user", "not logged in"), "message": message})
 
-@login_required
-@permission_required('students2.add_student')
 def add_student(request):
-    msg = ""
     if request.method == 'POST':
-        name = request.POST["student_name"]
-        email = request.POST["student_email"]
-        grade = request.POST["student_grade"]
-        student = Student(name=name, email=email, grade=grade)
-        student.save()
-        msg = messages.success(request, f"{student.name} Added to DB")
-    return render(request, "add_student.html", {"message": msg})
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("/students/admin/students")
 
+def students(request):
+    students=Student.objects.all()
+    return render(request, "students.html", {"students":students})
 
 def show_users(request):
     users = User.objects.all()
