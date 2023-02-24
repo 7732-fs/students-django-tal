@@ -2,6 +2,9 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.db.utils import IntegrityError
 from .models import Course, User, Student, Teacher
 from django.contrib import messages
+from django.contrib.auth.models import User, Permission
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
@@ -10,6 +13,24 @@ def home(request, methods=["POST ,GET"]):
     return render(request, "home.html")
 
 
+def app_login(request):
+    if request.method == 'POST':
+        (username, password) = (request.POST['username'], request.POST['password'])
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return HttpResponse("wrong login or password")
+    return render(request, "login.html")
+
+
+def app_logout(request):
+    logout(request)
+    return redirect('home')
+
+
+@login_required
 def add_course(request):
     message = ""
     try:
@@ -32,6 +53,8 @@ def add_course(request):
         return render(request, "add_course.html", {"user": request.session.get("user", "not logged in"), "message": message})
 
 
+@login_required
+@permission_required('students2.add_student')
 def add_student(request):
     msg = ""
     if request.method == 'POST':
