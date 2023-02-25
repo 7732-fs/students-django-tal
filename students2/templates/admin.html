@@ -1,5 +1,6 @@
-<<<<<<< HEAD <<<<<<< HEAD {% extends "base.html" %} {% block content %} {% include 'navbar-admin.html' %} {% endblock
-     content %}======={% extends 'base.html' %} {% block content %} <div style="display: flex">
+{% extends 'base.html' %}
+{% block content %}
+<div style="display: flex">
      {% include 'navbar-admin.html' %}
      <div class="admin">
           <h1>{{obj_name.capitalize}} Manager</h1>
@@ -21,21 +22,14 @@
                {% endfor %}
           </div>
      </div>
-     </div>
-     {% endblock %}
-     >>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4
-     =======
-     {% extends "base.html" %}
-     {% block content %}
-
-     <div class="navbar">
-
-          <li><a href="/">Home</a></li>
-          <li><a href="/app/admin/students">Students</a></li>
-          <li><a href="/app/admin/courses">Courses</a></li>
-          <li><a href="/app/admin/teachers">Teachers</a></li>
-
-     </div>
-
-     {% endblock content %}
-     >>>>>>> d4931140615b53ce18fa91b2dd4a5147e1534b93
+</div>
+{% endblock %}
+{% extends "base.html" %}
+{% block content %}
+<div class="navbar">
+     <li><a href="/">Home</a></li>
+     <li><a href="/app/admin/students">Students</a></li>
+     <li><a href="/app/admin/courses">Courses</a></li>
+     <li><a href="/app/admin/teachers">Teachers</a></li>
+</div>
+{% endblock content %}
