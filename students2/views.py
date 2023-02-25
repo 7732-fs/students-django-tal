@@ -4,31 +4,16 @@ from .models import Course, User, Student, Teacher
 from django.contrib import messages
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import login, authenticate, logout
-<<<<<<< HEAD
 from django.contrib.auth.decorators import login_required, permission_required
-=======
-from django.contrib.auth.decorators import login_required, permission_required 
-from students2.forms import StudentForm
->>>>>>> 713cd7e7d4f60655f9e7987a623794771f63b547
 
 # Create your views here.
 
 
 def home(request, methods=["POST ,GET"]):
-<<<<<<< HEAD
     if request.session
     logout_button = "logout"
     return render(request, "home.html", {"logout_button":logout_button})
 
-=======
-    if request.user.username!='':
-        logout_button = "Log Out"
-        link="/logout"
-    else:
-        logout_button = "Log In"
-        link="/login"
-    return render(request, "home.html", {"logout_button":logout_button, "link":link} )
->>>>>>> 713cd7e7d4f60655f9e7987a623794771f63b547
 
 def app_login(request):
     if request.method == 'POST':
@@ -69,12 +54,9 @@ def add_course(request):
         message = (f"{name} Already exists")
         return render(request, "add_course.html", {"user": request.session.get("user", "not logged in"), "message": message})
 
-<<<<<<< HEAD
 
 @login_required
 @permission_required('students2.add_student')
-=======
->>>>>>> 713cd7e7d4f60655f9e7987a623794771f63b547
 def add_student(request):
     if request.method == 'POST':
         form = StudentForm(request.POST)
