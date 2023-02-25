@@ -4,9 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-<<<<<<< HEAD
-
-=======
         {
             "name": "Python: Current File",
             "type": "python",
@@ -15,16 +12,11 @@
             "console": "integratedTerminal",
             "justMyCode": true
         },
->>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4
         {
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-<<<<<<< HEAD
-            "program": "${workspaceFolder}\\manage.py",
-=======
             "program": "${workspaceFolder}/manage.py",
->>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4
             "args": [
                 "runserver"
             ],

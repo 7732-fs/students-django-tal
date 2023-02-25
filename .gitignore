@@ -1,10 +1,5 @@
 *.pyc
-<<<<<<< HEAD
-
-students2/migrations
-=======
 db.*
 .vscode/extensions.json
 media/*
 students2/migrations/
->>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4

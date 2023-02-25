@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render, HttpResponse, redirect
-from django.db.utils import IntegrityError
-from .models import Course, User, Student, Teacher
-from django.contrib import messages
-from django.contrib.auth.models import User, Permission
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required, permission_required
-
-# Create your views here.
-
-=======
 from django.shortcuts import render, redirect, HttpResponse
 from students2.models import Course, Student, Teacher
 from django.contrib.auth import login, authenticate, logout
@@ -27,7 +15,6 @@ form_dict = {
     "courses": CourseForm,
     "teachers": TeacherForm
 }
->>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4
 
 def home(request, methods=["POST ,GET"]):
     if request.session
@@ -124,60 +111,6 @@ def show_users(request):
     users = User.objects.all()
     return render(request, "users.html", {"users": users})
 
-<<<<<<< HEAD
-def admin(request):
-    return render(request, "admin.html")
-
-def student_admin(request):
-    form = StudentForm()
-    return render(request, "students-admin.html", {"form":form})
-
-def add_teacher(request):
-    message = ""
-    try:
-        if request.method == 'POST':
-            name = request.POST["name"]
-            email = request.POST["email"]
-            teacher = Teacher(name=name, email=email)
-            teacher.save()
-            message = f"{name} Added successfully"
-            if "user" in request.session:
-                return render(request, "add_teacher.html", {"user": f'You are logged in as {request.session.get("user")}', "message": message})
-            else:
-                return render(request, "add_teacher.html", {"user": "You are not logged in",  "message": message})
-        else:
-            return render(request, "add_teacher.html", {"user": "You are not logged in",  "message": message})
-    except IntegrityError:
-        message = (f"{name} Already exists")
-        if "user" in request.session:
-            return render(request, "add_teacher.html", {"user": f'You are logged in as {request.session.get("user")}', "message": message})
-        else:
-            return render(request, "add_teacher.html", {"user": "You are not logged in",  "message": message})
-
-
-def register(request):
-    student = Student.objects.create(**dict(request.GET.items()))
-    Course.objects.get(name="python").students.add(student)
-    return HttpResponse(student.name)
-
-
-def show_courses(request):
-    return render(request, "courses.html", {"courses": Course.objects.all()})
-
-
-def show_course(request, course_id):
-    course = Course.objects.get(pk=course_id)
-    students = Student.objects.all()
-    registered = course.students.all()
-    return render(request, "course.html", {"course": course, "students": students, "registered": registered})
-
-
-def add_student_to_course(request, student_id, course_id):
-    course = Course.objects.get(id=course_id)
-    student = Student.objects.get(id=student_id)
-    course.students.add(student)
-    return redirect(f"/course/{course_id}")
-=======
 @login_required
 def student(request, sid=0):
     students=Student.objects.all()
@@ -275,4 +208,3 @@ def search(request):
         "courses": course_results,
         "teachers": teacher_results
     })
->>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4
