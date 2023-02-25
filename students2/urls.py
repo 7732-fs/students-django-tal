@@ -5,6 +5,15 @@ from . import views
 from django.conf import settings
 
 urlpatterns = [
+<<<<<<< HEAD
+=======
+    path('admin', admin.site.urls),
+    path('courses/add', views.add_course, name='add_course'),
+    path('login', views.app_login, name='login'),
+    path('logout', views.app_logout, name='logout'),
+    path('app/admin', views.admin, name='app/admin'),
+    path('users', views.show_users, name='show_users'),
+>>>>>>> d4931140615b53ce18fa91b2dd4a5147e1534b93
     path('', views.home, name='home'),
     path('login', views.my_login, name='my_login'),
     path('logout', views.logmeout, name='logout'),

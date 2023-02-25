@@ -22,6 +22,13 @@ def home(request, methods=["POST ,GET"]):
     logout_button = "logout"
     return render(request, "home.html", {"logout_button": logout_button})
 
+    if request.user.username!='':
+        log='Log Out'
+        log_link='/logout'
+    else:
+        log='Log In'
+        log_link='/login'
+    return render(request, "home.html", {'log':log, 'log_link':log_link})
 
 def app_login(request):
     if request.method == 'POST':
@@ -113,6 +120,9 @@ def logmeout(request):
 def show_users(request):
     users = User.objects.all()
     return render(request, "users.html", {"users": users})
+
+def admin(request):
+    return render(request,"admin.html")
 
 
 @login_required
