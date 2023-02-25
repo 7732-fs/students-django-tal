@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<script src="/static/filter.js" defer></script>
+{% if student %}
+     <div class="greeting">
+     <h1>{{student }} Page</h1>
+</div>
+     {% if student.image %}
+     <img src="/media/{{student.image}}" alt="">
+     {% endif %}
+<div >
+     {% if student.course_set.all %}
+     <div class="title">Your courses:</div>
+     {% for course in student.course_set.all %}
+     <div class="courses-list">
+          <div> {{ course.name }}</div>
+          <div>Teacher: {{course.teacher_set.all.first|default:"No teacher assigned yet"}}</div>
+     </div>
+     {% endfor %}
+     {% endif %}
+</div>
+</div>
+{% else %}
+<div class="title">Our Students</div>
+<input type="text" id="filter" placeholder="Search">
+<div class="page">
+          {% for student in students %}
+          {% include 'student-card.html' %}
+          {% endfor %}
+     </div>
+{% endif %}
+{% endblock %}

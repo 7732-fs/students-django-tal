@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 {% block content %}
 
@@ -9,3 +10,15 @@
     </form> 
 </div>
 {% endblock content %}
+=======
+{% extends 'base.html' %}
+{% block content %}
+<form action="/login" method="post">
+        <div class="login">
+            <input type="text" name="username" placeholder="Username" autofocus>
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Login">
+        </div>
+</form>
+{% endblock  %}
+>>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {font-family: sans-serif;
    gap: 1%;
    background-color: #E5E0FF;
@@ -48,3 +49,226 @@ and of navbar
 */
 
 
+=======
+body{
+}
+
+.login {
+    position: absolute;
+    left:25vw;
+    top:35vh;
+    background-color: silver;
+    padding: 3%;
+    box-shadow: 1px 1px black;
+}
+
+.login::before {
+    font-weight: bold;
+}
+
+.logo {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: oblique;
+    font-size: x-large;
+    border-bottom: 1px dotted black;
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+    padding-left: 0.5vw;
+}
+
+.navbar-main {
+    display: flex;
+    flex-direction: row;
+    margin: 1vh;
+    width: 100vw;
+    gap: 5vh;
+}
+
+.navbar-admin {
+    display: flex;
+    flex-direction: column;
+    margin: 1vh;
+    gap: 1em;
+    border-right: 1px solid black;
+    max-width: max-content;
+    padding-right: 1em;
+}
+
+
+.navbar-main > a {
+    text-decoration: none;
+    font-size: large;
+    color: black;
+}
+
+.navbar-main > a:hover {
+    background-color: green;
+    color: white;
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+    gap: 2vh;
+    flex-wrap: wrap;
+    
+}
+
+.page div {
+    max-width: max-content;
+    margin: 1vw;
+}
+
+.item{
+    display: grid;
+    grid-template-columns: 1fr min-content min-content;
+    grid-column-gap: 20px;
+}
+
+.update:nth-child(1) {
+    grid-column: 1;
+}
+
+.update:nth-child(2) {
+    grid-column: 2;
+}
+
+.update:nth-child(3) {
+    grid-column: 3;
+}
+
+.delete {
+    grid-column: 2;
+}
+
+.admin{
+    display: grid;
+    grid-template-columns: max-content max-content;
+    padding-left: 1em;
+    gap: 1em;
+}
+
+h1 {
+    text-transform: capitalize;
+    grid-column: span 2;
+}
+
+.title {
+    margin: 1em;
+    font-size: x-large;
+}
+.results {
+    margin-left: 3em;
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 33vw 33vw 33vw;
+    grid-auto-columns: minmax(100px, 100px);
+    gap: 1em;
+    justify-content: left;
+    max-width: 80vw;
+}
+
+.students {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.student {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 7px rgb(204, 202, 202);
+    padding: 1em;
+    gap: 1em;
+}
+
+.courses {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid;
+    padding-right: 1em;
+    gap: 1em;
+    max-width: 100%;
+}
+
+
+.course-card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 15px rgb(182, 179, 179);    
+    width: 100%;
+    gap: 1em;
+}
+
+
+
+.course-page {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: 100px 100px;
+    margin: 1em;
+
+}
+
+.course-page > * {
+    margin-left: 1em;
+}
+
+.course_name, .results a {
+    font-size: x-large;
+}
+
+.courses-list {
+    display: flex;
+    gap: 1em;
+    margin: 1em;
+}
+.results, .course a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    border-bottom: 1px solid gray;
+}
+
+[class^="course_"]::first-letter {
+    text-transform: capitalize;
+}
+
+.course_teacher, .teacher:first-child {
+    text-transform: capitalize;
+}
+
+* img {
+    max-width: 200px;
+    min-height: 210px;
+
+}
+
+
+.teachers {
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border-right: 1px solid;
+    padding-right: 1em;
+}
+
+.teacher {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 7px rgb(204, 202, 202);
+    padding: 1em;
+    gap: 1em;
+}
+
+.update_form {
+    grid-column: 2;
+}
+
+>>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4

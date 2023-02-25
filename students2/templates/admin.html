@@ -1,4 +1,31 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 {% block content %}
 {% include 'navbar-admin.html' %}
 {% endblock content %}
+=======
+{% extends 'base.html' %}
+{% block content %}
+<div style="display: flex">
+     {% include 'navbar-admin.html' %}
+     <div class="admin">
+          <h1>{{obj_name.capitalize}} Manager</h1>
+          <div class="admin_add">
+               Add new {{obj_name}}
+               {% include "add.html" %}
+               <hr>
+          </div>
+          <div class="admin_list">
+               <input type="text" placeholder="Filter" id='filter' autofocus>
+               <hr>
+               <script src="/static/filter.js" defer></script>
+               {% for obj in objects %}
+               <div class="item">
+                    <div class="{{obj_name}}_admin">{{ obj.name }}</div><a href="/{{obj_name}}/update/{{obj.id}}">Update</a><a href="/{{obj_name}}/delete/{{obj.id}}">Delete</a>
+               </div>
+               {% endfor %}
+          </div>
+     </div>
+</div>
+{% endblock %}
+>>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4

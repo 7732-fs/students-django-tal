@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,3 +26,28 @@
     </h3>
 </body>
 </html>
+=======
+{% extends 'base.html' %}
+{% block content %}
+<div class="course-page">
+     <div class="title">
+          {{ course.name }} Course
+     </div>
+     <div class="teachers">
+          {% for teacher in course.teacher_set.all %}
+          Instructor: {% include 'teacher-card.html' %}
+          {% endfor %}     
+     </div>
+     <div class="course-description">
+          {{ course.description }}
+     </div>
+     <div class="students" style="border-right: none">
+          <div class="title">
+               Current Students
+          </div>
+     {% for student in course.students.all %}
+          {% include 'student-card.html' %}
+     {% endfor %}
+     {% endblock  %}
+</div>
+>>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4

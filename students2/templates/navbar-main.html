@@ -1,0 +1,12 @@
+<div class="navbar-main">
+     <a href="/students">Students</a>
+     <a href="/courses">Courses</a>
+     <a href="/teachers">Teachers</a>
+     <a href="/students/admin">Admin</a>
+     <form action="/search">
+          <input type="text" name="q" placeholder="Search" onchange="submit()">
+     </form>
+     <a href="/student/{{ student.id }}">{{ user }}</a>    
+     <a href="/logout">Log Out</a>
+</div>
+<hr>

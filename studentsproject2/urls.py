@@ -17,5 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+<<<<<<< HEAD
     path('', include('students2.urls')),
 ]
+=======
+    path('', include('students2.urls'))
+]
+>>>>>>> f41926ab0dd739b3ce000e473356591a1a6037e4
