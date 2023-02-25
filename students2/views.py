@@ -16,10 +16,11 @@ form_dict = {
     "teachers": TeacherForm
 }
 
+
 def home(request, methods=["POST ,GET"]):
-    if request.session
+    if request.session:
     logout_button = "logout"
-    return render(request, "home.html", {"logout_button":logout_button})
+    return render(request, "home.html", {"logout_button": logout_button})
 
 
 def app_login(request):
@@ -71,9 +72,11 @@ def add_student(request):
             form.save()
         return redirect("/students/admin/students")
 
+
 def students(request):
-    students=Student.objects.all()
-    return render(request, "students.html", {"students":students})
+    students = Student.objects.all()
+    return render(request, "students.html", {"students": students})
+
 
 def my_login(request):
     if request.method == 'POST':
@@ -82,9 +85,9 @@ def my_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            if user.username=="admin":
+            if user.username == "admin":
                 return redirect('students_admin')
-            app_user=Student.objects.get(name=user.email)
+            app_user = Student.objects.get(name=user.email)
             return redirect(f"/student/{app_user.id}")
         else:
             raise PermissionDenied()
@@ -111,30 +114,36 @@ def show_users(request):
     users = User.objects.all()
     return render(request, "users.html", {"users": users})
 
+
 @login_required
 def student(request, sid=0):
-    students=Student.objects.all()
-    student=Student.objects.filter(pk=sid).first()
-    return render(request, "student.html", {"student":student, "students":students})
-    
+    students = Student.objects.all()
+    student = Student.objects.filter(pk=sid).first()
+    return render(request, "student.html", {"student": student, "students": students})
+
+
 def courses(request):
-    courses=Course.objects.all()
-    return render(request, "courses.html", {"courses":courses})
+    courses = Course.objects.all()
+    return render(request, "courses.html", {"courses": courses})
+
 
 def course(request, cid=0):
-    courses=Course.objects.all()
-    course=Course.objects.get(pk=cid)
-    return render(request, "course.html", {"course":course, "courses":courses})
+    courses = Course.objects.all()
+    course = Course.objects.get(pk=cid)
+    return render(request, "course.html", {"course": course, "courses": courses})
+
 
 @login_required
 def teacher(request, tid=0):
-    teachers=Teacher.objects.all()
-    student=Teacher.objects.filter(pk=tid).first() or User.objects.get(username="admin")
-    return render(request, "teacher.html", {"teacher":teacher, "teachers":teachers})
-    
+    teachers = Teacher.objects.all()
+    student = Teacher.objects.filter(pk=tid).first() or User.objects.get(username="admin")
+    return render(request, "teacher.html", {"teacher": teacher, "teachers": teachers})
+
+
 def teachers(request):
-    teachers=Teacher.objects.all()
-    return render(request, "teachers.html", {"teachers":teachers})
+    teachers = Teacher.objects.all()
+    return render(request, "teachers.html", {"teachers": teachers})
+
 
 @login_required
 @permission_required('students2.students_admin')
@@ -163,7 +172,7 @@ def update(request, obj, oid):
             form.save()
             return redirect(f"/students/admin/{obj}")
     else:
-        return render(request, 'update.html', {"form": form, "obj_name":obj, "oid":oid})
+        return render(request, 'update.html', {"form": form, "obj_name": obj, "oid": oid})
 
 
 @login_required
@@ -185,8 +194,8 @@ def add(request, obj):
         form = TeacherForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
-            if obj=="students":
-                User.objects.create_user(email=form.cleaned_data["email"],username=form.cleaned_data["email"], password="1234")
+            if obj == "students":
+                User.objects.create_user(email=form.cleaned_data["email"], username=form.cleaned_data["email"], password="1234")
             form.save()
             return redirect(f"/students/admin/{obj}")
         else:
@@ -198,11 +207,11 @@ def add(request, obj):
 def search(request):
     q = request.GET.get("q", "")
     student_results = (Student.objects.filter(
-        name__istartswith=q) | Student.objects.filter(email__istartswith=q)) 
+        name__istartswith=q) | Student.objects.filter(email__istartswith=q))
     course_results = (Course.objects.filter(
         name__istartswith=q) | Course.objects.filter(description__icontains=q))
     teacher_results = (Teacher.objects.filter(
-        name__startswith=q) | Teacher.objects.filter(email__startswith=q)) 
+        name__startswith=q) | Teacher.objects.filter(email__startswith=q))
     return render(request, "search.html", {
         "students": student_results,
         "courses": course_results,

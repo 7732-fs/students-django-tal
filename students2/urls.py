@@ -4,13 +4,13 @@ from django.conf.urls.static import static
 from . import views
 from django.conf import settings
 
-urlpatterns=[
+urlpatterns = [
     path('', views.home, name='home'),
     path('login', views.my_login, name='my_login'),
     path('logout', views.logmeout, name='logout'),
     path('admin/', admin.site.urls),
-    path('users', views.show_users, name='show_users'),    
-    path('search', views.search, name='search'),    
+    path('users', views.show_users, name='show_users'),
+    path('search', views.search, name='search'),
     path('register', views.register, name='register'),
     path('students/admin', views.admin, name='students_admin'),
     path('students', views.student, name='students'),
