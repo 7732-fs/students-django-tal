@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div> this is your home page
-</div>
+{% for student in students %}
+{{ student}}
+{% endfor %}
 {% endblock content %}

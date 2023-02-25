@@ -4,16 +4,31 @@ from .models import Course, User, Student, Teacher
 from django.contrib import messages
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import login, authenticate, logout
+<<<<<<< HEAD
 from django.contrib.auth.decorators import login_required, permission_required
+=======
+from django.contrib.auth.decorators import login_required, permission_required 
+from students2.forms import StudentForm
+>>>>>>> 713cd7e7d4f60655f9e7987a623794771f63b547
 
 # Create your views here.
 
 
 def home(request, methods=["POST ,GET"]):
+<<<<<<< HEAD
     if request.session
     logout_button = "logout"
     return render(request, "home.html", {"logout_button":logout_button})
 
+=======
+    if request.user.username!='':
+        logout_button = "Log Out"
+        link="/logout"
+    else:
+        logout_button = "Log In"
+        link="/login"
+    return render(request, "home.html", {"logout_button":logout_button, "link":link} )
+>>>>>>> 713cd7e7d4f60655f9e7987a623794771f63b547
 
 def app_login(request):
     if request.method == 'POST':
@@ -54,25 +69,33 @@ def add_course(request):
         message = (f"{name} Already exists")
         return render(request, "add_course.html", {"user": request.session.get("user", "not logged in"), "message": message})
 
+<<<<<<< HEAD
 
 @login_required
 @permission_required('students2.add_student')
+=======
+>>>>>>> 713cd7e7d4f60655f9e7987a623794771f63b547
 def add_student(request):
-    msg = ""
     if request.method == 'POST':
-        name = request.POST["student_name"]
-        email = request.POST["student_email"]
-        grade = request.POST["student_grade"]
-        student = Student(name=name, email=email, grade=grade)
-        student.save()
-        msg = messages.success(request, f"{student.name} Added to DB")
-    return render(request, "add_student.html", {"message": msg})
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("/students/admin/students")
 
+def students(request):
+    students=Student.objects.all()
+    return render(request, "students.html", {"students":students})
 
 def show_users(request):
     users = User.objects.all()
     return render(request, "users.html", {"users": users})
 
+def admin(request):
+    return render(request, "admin.html")
+
+def student_admin(request):
+    form = StudentForm()
+    return render(request, "students-admin.html", {"form":form})
 
 def add_teacher(request):
     message = ""
