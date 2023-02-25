@@ -10,7 +10,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 
 def home(request, methods=["POST ,GET"]):
-    return render(request, "home.html")
+    if request.session
+    logout_button = "logout"
+    return render(request, "home.html", {"logout_button":logout_button})
 
 
 def app_login(request):
